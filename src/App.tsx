@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+import PrivateLayout from "./Layout/PrivateLayout";
+import Home, { homeLoader } from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import NotFound from "./pages/notfound/NotFound";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route element={<PrivateLayout />}>
+        <Route path="/" element={<Home />} loader={homeLoader} />
+        <Route path="login" element={<Login />} />
+        <Route path="*" element={<NotFound/>}/>
+      </Route>
+    )
   );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
+// <PrivateLayout>
+// </PrivateLayout>
