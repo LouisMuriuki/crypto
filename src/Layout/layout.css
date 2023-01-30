@@ -1,0 +1,12 @@
+.ant-menu-item,.ant-menu-title-content,.ant-menu-submenu-title {
+    display: flex;
+    align-items: center;
+  }
+  .ant-menu-title-content>span{
+    display: flex;
+    align-items: center
+  }
+  
+  .ant-menu-item .anticon {
+    margin-right: 8px;
+  }

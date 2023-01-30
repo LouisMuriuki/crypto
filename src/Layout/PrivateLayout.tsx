@@ -1,54 +1,59 @@
 import React, { useState } from "react";
 import {
-  DesktopOutlined,
-  FileOutlined,
   PieChartOutlined,
   TeamOutlined,
+  PoweroffOutlined,
   UserOutlined,
   BellOutlined,
+  ScheduleOutlined,
   PlusOutlined,
+  DeliveredProcedureOutlined,
+  UsergroupAddOutlined
 } from "@ant-design/icons";
-import { Avatar, Badge, Button, MenuProps, Space, Typography } from "antd";
+import { Avatar, Badge, Button,Space, Typography } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import{NavLink,Outlet} from"react-router-dom"
-interface Children {
-  children: React.ReactNode;
-}
-
+import { Link } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import "./layout.css"
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
-type MenuItem = Required<MenuProps>["items"][number];
+
+
+interface MenuItem {
+  title: string;
+  key: string;
+  icon?: React.ReactNode;
+  to?: string;
+  children?: MenuItem[];
+}
+
+const { SubMenu } = Menu;
 
 function getItem(
-  label: React.ReactNode,
-  key: React.Key,
+  title: string,
+  key: string,
   icon?: React.ReactNode,
+  to?: string,
   children?: MenuItem[]
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
+) {
+  return { title, key,to, icon, children };
 }
 
 const items: MenuItem[] = [
-  getItem("DashBoard", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("User", "sub1", <UserOutlined />, [
-    getItem("Tom", "3"),
-    getItem("Bill", "4"),
-    getItem("Alex", "5"),
+  getItem("DashBoard", "1", <PieChartOutlined   style={{ fontSize: "16px"}}/>, "/dashboard"),
+  getItem("Staff", "sub1", <TeamOutlined  style={{ fontSize: "16px"}}/>, undefined, [
+    getItem("Manage", "2", <UsergroupAddOutlined />, "/staff/"),
+    getItem("Reports", "3", <DeliveredProcedureOutlined  style={{ fontSize: "16px"}}/>, "/staff/reports"),
   ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "7"),
+  getItem("Meetings", "sub2", <ScheduleOutlined  style={{ fontSize: "16px"}}/>, undefined, [
+    getItem("View", "6", undefined, "/meetings/"),
+    getItem("Reports", "7", <DeliveredProcedureOutlined style={{ fontSize: "16px"}}/>, "/meetings/reports"),
   ]),
-  getItem("Files", "8", <FileOutlined />),
+  getItem("Profile", "8", < UserOutlined style={{ fontSize: "16px"}}/>, "/profile"),
+  getItem("Logout", "9", <PoweroffOutlined  style={{ fontSize: "16px"}}/>),
 ];
 
-const PrivateLayout= () => {
+const PrivateLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -80,17 +85,54 @@ const PrivateLayout= () => {
             margin: 16,
           }}
         >
-          <Title level={3} style={{ color: "#FFF" }}>
+          <Title level={4} style={{ color: "#FFF" }}>
             MGENI KARIBU
           </Title>
         </div>
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          // defaultSelectedKeys={["1"]}
           mode="inline"
           style={{ paddingTop: 10 }}
-          items={items}
-        />
+        >
+          {items.map((item) => {
+            if (item.children) {
+              return (
+                <SubMenu
+                  key={item.key}
+                  title={
+                    <span>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </span>
+                  }
+                >
+                  {item.children.map((child) => (
+                    <Menu.Item key={child.key}>
+                      {child.icon}
+                      {child.to ? (
+                        <Link  to={child.to}>{child.title}</Link>
+                      ) : (
+                        child.title
+                      )}
+                    </Menu.Item>
+                  ))}
+                </SubMenu>
+              );
+            } else {
+              return (
+                <Menu.Item key={item.key}>
+                  {item.icon}
+                  {item.to ? (
+                    <Link to={item.to}>{item.title}</Link>
+                  ) : (
+                    item.title
+                  )}
+                </Menu.Item>
+              );
+            }
+          })}
+        </Menu>
       </Sider>
       <Layout
         className="site-layout"
@@ -112,9 +154,6 @@ const PrivateLayout= () => {
               justifyContent: "flex-center",
             }}
           >
-            <Title level={3} style={{ marginLeft: 80 }}>
-              GoodAfternoon Monica,
-            </Title>
           </div>
           <div
             style={{
@@ -125,7 +164,7 @@ const PrivateLayout= () => {
           >
             <div style={{ paddingRight: 20 }}>
               <Space size="large">
-                <Button icon={<PlusOutlined />}>New Meeting</Button>
+                <Button className="flex items-center justify-center" icon={<PlusOutlined />}>New Meeting</Button>
                 <Badge dot>
                   <BellOutlined
                     style={{ fontSize: "18px", cursor: "pointer" }}
@@ -148,9 +187,8 @@ const PrivateLayout= () => {
               background: colorBgContainer,
             }}
           >
-          <Outlet/>
+            <Outlet />
           </div>
-          
         </Content>
       </Layout>
     </Layout>
