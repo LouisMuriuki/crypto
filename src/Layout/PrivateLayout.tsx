@@ -8,16 +8,15 @@ import {
   ScheduleOutlined,
   PlusOutlined,
   DeliveredProcedureOutlined,
-  UsergroupAddOutlined
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
-import { Avatar, Badge, Button,Space, Typography } from "antd";
+import { Avatar, Badge, Button, Space, Typography } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { NavLink, Outlet } from "react-router-dom";
-import "./layout.css"
+import "./layout.css";
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
-
 
 interface MenuItem {
   title: string;
@@ -36,21 +35,53 @@ function getItem(
   to?: string,
   children?: MenuItem[]
 ) {
-  return { title, key,to, icon, children };
+  return { title, key, to, icon, children };
 }
 
 const items: MenuItem[] = [
-  getItem("DashBoard", "1", <PieChartOutlined   style={{ fontSize: "16px"}}/>, "/dashboard"),
-  getItem("Staff", "sub1", <TeamOutlined  style={{ fontSize: "16px"}}/>, undefined, [
-    getItem("Manage", "2", <UsergroupAddOutlined />, "/staff/"),
-    getItem("Reports", "3", <DeliveredProcedureOutlined  style={{ fontSize: "16px"}}/>, "/staff/reports"),
-  ]),
-  getItem("Meetings", "sub2", <ScheduleOutlined  style={{ fontSize: "16px"}}/>, undefined, [
-    getItem("View", "6", undefined, "/meetings/"),
-    getItem("Reports", "7", <DeliveredProcedureOutlined style={{ fontSize: "16px"}}/>, "/meetings/reports"),
-  ]),
-  getItem("Profile", "8", < UserOutlined style={{ fontSize: "16px"}}/>, "/profile"),
-  getItem("Logout", "9", <PoweroffOutlined  style={{ fontSize: "16px"}}/>),
+  getItem(
+    "DashBoard",
+    "1",
+    <PieChartOutlined style={{ fontSize: "16px" }} />,
+    "/dashboard"
+  ),
+  getItem(
+    "Staff",
+    "sub1",
+    <TeamOutlined style={{ fontSize: "16px" }} />,
+    undefined,
+    [
+      getItem("Manage", "2", <UsergroupAddOutlined />, "/staff/"),
+      getItem(
+        "Reports",
+        "3",
+        <DeliveredProcedureOutlined style={{ fontSize: "16px" }} />,
+        "/staff/reports"
+      ),
+    ]
+  ),
+  getItem(
+    "Meetings",
+    "sub2",
+    <ScheduleOutlined style={{ fontSize: "16px" }} />,
+    undefined,
+    [
+      getItem("View", "6", undefined, "/meetings/"),
+      getItem(
+        "Reports",
+        "7",
+        <DeliveredProcedureOutlined style={{ fontSize: "16px" }} />,
+        "/meetings/reports"
+      ),
+    ]
+  ),
+  getItem(
+    "Profile",
+    "8",
+    <UserOutlined style={{ fontSize: "16px" }} />,
+    "/profile"
+  ),
+  getItem("Logout", "9", <PoweroffOutlined style={{ fontSize: "16px" }} />),
 ];
 
 const PrivateLayout = () => {
@@ -58,6 +89,20 @@ const PrivateLayout = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const location = useLocation();
+  console.log(location);
+  let currentLink: string=""
+  const crumbs = location.pathname
+    .split("/")
+    .filter((crumb) => crumb !== "")
+    .map((crumb) => {
+      currentLink+=`/${crumb}`;
+      return (
+        <div className="crumb">
+          <Link to={currentLink}>{crumb}</Link>
+        </div>
+      );
+    });
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -111,7 +156,7 @@ const PrivateLayout = () => {
                     <Menu.Item key={child.key}>
                       {child.icon}
                       {child.to ? (
-                        <Link  to={child.to}>{child.title}</Link>
+                        <Link to={child.to}>{child.title}</Link>
                       ) : (
                         child.title
                       )}
@@ -159,12 +204,26 @@ const PrivateLayout = () => {
             style={{
               display: "flex",
               alignItems: "center",
+              justifyContent: "flex-center",
+            }}
+          >
+           <h2>BizPlus Limited</h2> 
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
               justifyContent: "flex-end",
             }}
           >
             <div style={{ paddingRight: 20 }}>
               <Space size="large">
-                <Button className="flex items-center justify-center" icon={<PlusOutlined />}>New Meeting</Button>
+                <Button
+                  className="flex items-center justify-center"
+                  icon={<PlusOutlined />}
+                >
+                  New Meeting
+                </Button>
                 <Badge dot>
                   <BellOutlined
                     style={{ fontSize: "18px", cursor: "pointer" }}
@@ -176,9 +235,8 @@ const PrivateLayout = () => {
           </div>
         </Header>
         <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+          <Breadcrumb style={{ margin: "16px 0" }} className="breadcrumbs">
+            <Breadcrumb.Item>{crumbs}</Breadcrumb.Item>
           </Breadcrumb>
           <div
             style={{
