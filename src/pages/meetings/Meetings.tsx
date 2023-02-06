@@ -2,25 +2,20 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useContext } from "react";
 import Header from "../../components/header/Header";
 import List from "../../components/list/List";
+import TableList from "../../components/Table/TableList";
 import HeaderContext from "../../context/HeaderContext";
-const header = [
-  {
-    title: "Upcoming",
-  },
-  {
-    title: "Rescheduled",
-  },
-  {
-    title: "Cancelled",
-  },
-];
+const header = ["Upcoming", "Rescheduled", "Cancelled"];
+const options = header.map(option => ({ label: option, value: option }));
 const Meetings = () => {
-  const {clickedindex,setClickedIndex}=useContext(HeaderContext)
+  const { headervalue, setHeaderValue } = useContext(HeaderContext);
   return (
     <div>
-      Meetings
-      <Header header={header} clickedindex={clickedindex} setClickedIndex={setClickedIndex}/>
-      <List />
+      <Header
+        header={options}
+        headervalue={headervalue}
+        setHeaderValue={setHeaderValue}
+      />
+      <TableList />
     </div>
   );
 };

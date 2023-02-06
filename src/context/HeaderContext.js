@@ -2,10 +2,10 @@ import { createContext, useState } from "react";
 
 const HeaderContext = createContext();
 export const HeaderContextProvider = ({ children }) => {
-  const [clickedindex, setClickedIndex] = useState(0);
+  const [headervalue, setHeaderValue] = useState("");
 
   return (
-    <HeaderContext.Provider value={{ clickedindex, setClickedIndex }}>
+    <HeaderContext.Provider value={{ headervalue, setHeaderValue }}>
       {children}
     </HeaderContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   PieChartOutlined,
   TeamOutlined,
@@ -15,6 +15,9 @@ import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import { NavLink, Outlet } from "react-router-dom";
 import "./layout.css";
+import DrawerContext from "../context/DrawerContext";
+import NotificationDrawer from "../components/drawer/NotificationDrawer";
+import NewMeetingsForm from "../components/drawer/NewMeetingsForm";
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
 
@@ -86,17 +89,18 @@ const items: MenuItem[] = [
 
 const PrivateLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const { setNotificationsOpen, setNewMeetingOpen } = useContext(DrawerContext);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
   const location = useLocation();
   console.log(location);
-  let currentLink: string=""
+  let currentLink: string = "";
   const crumbs = location.pathname
     .split("/")
     .filter((crumb) => crumb !== "")
     .map((crumb) => {
-      currentLink+=`/${crumb}`;
+      currentLink += `/${crumb}`;
       return (
         <div className="crumb">
           <Link to={currentLink}>{crumb}</Link>
@@ -198,8 +202,7 @@ const PrivateLayout = () => {
               alignItems: "center",
               justifyContent: "flex-center",
             }}
-          >
-          </div>
+          ></div>
           <div
             style={{
               display: "flex",
@@ -207,7 +210,7 @@ const PrivateLayout = () => {
               justifyContent: "flex-center",
             }}
           >
-           <h2>BizPlus Limited</h2> 
+            <h2>BizPlus Limited</h2>
           </div>
           <div
             style={{
@@ -216,20 +219,25 @@ const PrivateLayout = () => {
               justifyContent: "flex-end",
             }}
           >
-            <div style={{ paddingRight: 20 }}>
+            <div style={{ paddingRight: 20 }} className="flex items-center">
               <Space size="large">
                 <Button
+                  onClick={() => setNewMeetingOpen(true)}
                   className="flex items-center justify-center"
                   icon={<PlusOutlined />}
                 >
                   New Meeting
                 </Button>
-                <Badge dot>
-                  <BellOutlined
-                    style={{ fontSize: "18px", cursor: "pointer" }}
-                  />
-                </Badge>
-                <Avatar src="https://joeschmoe.io/api/v1/random" />
+                <div onClick={() => setNotificationsOpen(true)}>
+                  <Badge dot>
+                    <BellOutlined
+                      style={{ fontSize: "20px", cursor: "pointer" }}
+                    />
+                  </Badge>
+                </div>
+                <div className="cursor-pointer">
+                  <Avatar src="https://joeschmoe.io/api/v1/random" />
+                </div>
               </Space>
             </div>
           </div>
@@ -246,6 +254,8 @@ const PrivateLayout = () => {
             }}
           >
             <Outlet />
+            <NotificationDrawer />
+            <NewMeetingsForm />
           </div>
         </Content>
       </Layout>
