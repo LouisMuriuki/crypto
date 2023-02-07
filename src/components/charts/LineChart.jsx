@@ -32,6 +32,7 @@ const LineChart = () => {
 
   return (
     <div className="bg-white shadow-md border p-3">
+       <h1 className='flex items-center justify-center underline underline-offset-4 '>Today's Engagements</h1>
       <Line {...config} />
     </div>
   );

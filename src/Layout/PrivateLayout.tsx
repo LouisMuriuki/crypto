@@ -10,6 +10,7 @@ import {
   DeliveredProcedureOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
+import {  BsBriefcaseFill } from "react-icons/bs";
 import { Avatar, Badge, Button, Space, Typography } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, useLocation } from "react-router-dom";
@@ -18,6 +19,7 @@ import "./layout.css";
 import DrawerContext from "../context/DrawerContext";
 import NotificationDrawer from "../components/drawer/NotificationDrawer";
 import NewMeetingsForm from "../components/drawer/NewMeetingsForm";
+import ProfilePopup from "../components/drawer/ProfilePopup";
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
 
@@ -52,24 +54,24 @@ const items: MenuItem[] = [
     "Staff",
     "sub1",
     <TeamOutlined style={{ fontSize: "16px" }} />,
-    undefined,
-    [
-      getItem("Manage", "2", <UsergroupAddOutlined />, "/staff/"),
-      getItem(
-        "Reports",
-        "3",
-        <DeliveredProcedureOutlined style={{ fontSize: "16px" }} />,
-        "/staff/reports"
-      ),
-    ]
+    "/staff/",
+    // [
+    //   getItem("Manage", "2", <UsergroupAddOutlined />, "/staff/"),
+    //   getItem(
+    //     "Reports",
+    //     "3",
+    //     <DeliveredProcedureOutlined style={{ fontSize: "16px" }} />,
+    //     "/staff/reports"
+    //   ),
+    // ]
   ),
   getItem(
     "Meetings",
     "sub2",
-    <ScheduleOutlined style={{ fontSize: "16px" }} />,
+    <BsBriefcaseFill size={16} style={{marginRight:10}}/>,
     undefined,
     [
-      getItem("View", "6", undefined, "/meetings/"),
+      getItem("View", "6", <BsBriefcaseFill size={16} style={{marginRight:10}}/>, "/meetings/"),
       getItem(
         "Reports",
         "7",
@@ -89,7 +91,7 @@ const items: MenuItem[] = [
 
 const PrivateLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const { setNotificationsOpen, setNewMeetingOpen } = useContext(DrawerContext);
+  const { setNotificationsOpen, setNewMeetingOpen, profileModalOpen, setProfileModalOpen} = useContext(DrawerContext);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -236,7 +238,7 @@ const PrivateLayout = () => {
                   </Badge>
                 </div>
                 <div className="cursor-pointer">
-                  <Avatar src="https://joeschmoe.io/api/v1/random" />
+                  <Avatar onClick={()=>setProfileModalOpen(true)} src="https://media.istockphoto.com/id/1270067126/photo/smiling-indian-man-looking-at-camera.jpg?s=612x612&w=0&k=20&c=ovIQ5GPurLd3mOUj82jB9v-bjGZ8updgy1ACaHMeEC0=" />
                 </div>
               </Space>
             </div>
@@ -256,6 +258,7 @@ const PrivateLayout = () => {
             <Outlet />
             <NotificationDrawer />
             <NewMeetingsForm />
+            <ProfilePopup/>
           </div>
         </Content>
       </Layout>

@@ -8,8 +8,8 @@ interface Props {
 }
 
 const ReportCard = ({ title, description,key}: Props) => (
-  <Card key={key} style={{ width: 300 }} className="flex flex-col p-0.5 h- ">
-    <h1 className="py-1 px-0.5 font-bold text-lg underline" >{title}</h1>
+  <Card key={key} style={{ width: 350 }} className="flex flex-col h-[200px] mb-8 cursor-pointer">
+    <h1 className=" px-0.5 font-bold text-lg underline" >{title}</h1>
     <p className="w-full px-1 text-base">{description}</p>
   </Card>
 );

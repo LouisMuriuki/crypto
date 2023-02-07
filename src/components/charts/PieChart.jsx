@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
 import { Pie } from "@ant-design/plots";
+import { SegmentedLabeledOption } from "antd/es/segmented";
+import Header from "../header/Header";
+import HeaderContext from "../../context/HeaderContext";
 
-const PieChart = () => {
+const PieChart = ({ header }) => {
+  const { headervalue, setHeaderValue } = useContext(HeaderContext);
   const data = [
     {
-      type: "分类一",
+      type: "CEO",
       value: 27,
     },
     {
-      type: "分类二",
+      type: "HR",
       value: 25,
     },
     {
-      type: "分类三",
+      type: "CFO",
       value: 18,
     },
     {
-      type: "分类四",
+      type: "ACC",
       value: 15,
     },
     {
-      type: "分类五",
+      type: "CTO",
       value: 10,
-    },
-    {
-      type: "其他",
-      value: 5,
     },
   ];
   const config = {
@@ -51,7 +51,18 @@ const PieChart = () => {
     ],
   };
   return (
-    <div className="bg-white shadow-md border p-3">
+    <div className="bg-white shadow-md border p-1 w-full">
+      <div className="flex items-center px-3 justify-between">
+        <h1 className="text-lg underline underline-offset-4 ">Staff Engagements</h1>
+        <div>
+          <Header
+            header={header}
+            setHeaderValue={setHeaderValue}
+            headervalue={headervalue}
+          />
+        </div>
+      </div>
+
       <Pie {...config} />
     </div>
   );
