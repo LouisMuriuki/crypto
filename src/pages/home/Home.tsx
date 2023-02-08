@@ -5,9 +5,10 @@ import BarChart from "../../components/charts/BarChart";
 import LineChart from "../../components/charts/LineChart";
 import PieChart from "../../components/charts/PieChart";
 import RecentMeetings from "../../components/recentmeetings/RecentMeetings";
-import Widget from "../../components/widgets/Widget";
+
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import Widget from "../../components/widgets/widget";
 
 const header = ["Today", "This Month"];
 const options = header.map((option) => ({ label: option, value: option }));
