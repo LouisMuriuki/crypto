@@ -99,6 +99,7 @@ const items: MenuItem[] = [
 const PrivateLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [time, setTime] = useState(new Date());
+
   const {
     setNotificationsOpen,
     setNewMeetingOpen,
@@ -127,6 +128,8 @@ const PrivateLayout = () => {
         </div>
       );
     });
+
+  
 
   useEffect(() => {
     const intervalId = setInterval(() => setTime(new Date()), 1000);
@@ -310,7 +313,7 @@ const PrivateLayout = () => {
             style={{
               padding: isMobile ? 10 : 24,
               minHeight: 360,
-              background: colorBgContainer,
+              backgroundColor:"#f5f5f5"
             }}
           >
             <Outlet />

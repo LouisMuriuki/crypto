@@ -21,7 +21,7 @@ function App() {
     createRoutesFromElements(
       <Route element={<PrivateLayout />}>
         <Route path="/">
-          <Route index element={<Login />} />
+          <Route index element={<Home />} />
           <Route path="dashboard" element={<Home />} />
           <Route path="staff">
             <Route index element={<Staff />} />

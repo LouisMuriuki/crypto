@@ -4,14 +4,15 @@ import React, { useState } from "react";
 
 interface Props {
   header: SegmentedLabeledOption[];
+  bgcolor:string;
   headervalue: string | number;
   setHeaderValue: React.Dispatch<React.SetStateAction<string|number>>;
 }
-const Header = ({ header, setHeaderValue, headervalue }: Props) => {
+const Header = ({ header, setHeaderValue, headervalue,bgcolor }: Props) => {
  
 
   return (
-    <Segmented options={header} value={headervalue} onChange={setHeaderValue} />
+    <Segmented options={header} style={{backgroundColor:bgcolor}} value={headervalue} onChange={setHeaderValue} />
   );
 };
 

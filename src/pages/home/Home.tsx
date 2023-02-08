@@ -1,5 +1,5 @@
 import { Typography } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import BarChart from "../../components/charts/BarChart";
 import LineChart from "../../components/charts/LineChart";
@@ -37,17 +37,28 @@ const widgetdata = [
 
 function Home() {
   const { Title } = Typography;
+  let time = new Date();
   // const homedata=useLoaderData()
+  const [greeting, setGreeting] = useState<string>("");
+  let hours = time.getHours();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  useEffect(() => {
+    hours < 12
+      ? setGreeting("GoodMorning")
+      : hours <= 18 && hours >= 12
+      ? setGreeting("GoodAfternoon")
+      : setGreeting("GoodEvening");
+  }, []);
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between mb-5 px-2">
-        <Title level={isMobile?4:2}>GoodAfternoon Monica,</Title>
+        <Title level={isMobile?4:2}>{greeting} Monica,</Title>
       </div>
       <div></div>
-      <div className="flex w-full mb-5 md:items-center p-0 md:p-0.5 justify-around md:justify-between flex-wrap">
+      <div className="flex w-full mb-5 md:items-center p-0 md:p-2 justify-around md:justify-between flex-wrap">
         {widgetdata.map((data, i) => {
           return (
             <Widget

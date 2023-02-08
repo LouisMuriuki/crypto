@@ -19,7 +19,7 @@ const Staff = () => {
 
   return (
     <div>
-      <div className="bg-[#e6faf3] shadow-md border p-2 mb-4 flex justify-between rounde border-gray-100  items-center">
+      <div className="bg-[white] shadow-md border p-2 mb-4 flex justify-between rounded border-gray-100  items-center">
         <Title level={3} className="flex  items-center justify-center">
           NEW STAFF
         </Title>
@@ -33,7 +33,7 @@ const Staff = () => {
         </Button>
       </div>
       <TableList />
-      <NewStaffModal/>
+      <NewStaffModal />
     </div>
   );
 };

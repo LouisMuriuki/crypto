@@ -4,6 +4,7 @@ import Header from "../../components/header/Header";
 import List from "../../components/list/List";
 import TableList from "../../components/Table/TableList";
 import HeaderContext from "../../context/HeaderContext";
+import "./meetings.css"
 const header = ["Upcoming", "Rescheduled", "Cancelled"];
 const options = header.map((option) => ({ label: option, value: option }));
 const Meetings = () => {
@@ -12,6 +13,7 @@ const Meetings = () => {
     <div className="flex flex-col">
       <div className="flex justify-end mb-4">
         <Header
+          bgcolor="#fff"
           header={options}
           headervalue={headervalue}
           setHeaderValue={setHeaderValue}

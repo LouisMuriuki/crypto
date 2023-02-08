@@ -74,7 +74,7 @@ const TableList: React.FC = () => {
       render: (_, record) => (
         <Space size="middle">
           <Button onClick={()=>navigate("2")} type="primary">Info</Button>
-          <DeleteOutlined size={22} style={{ color: 'red' }} onClick={() => setAsyncConfirmOpen(true)} />
+          <DeleteOutlined style={{ fontSize: "26px",color: 'red' }} onClick={() => setAsyncConfirmOpen(true)} />
         </Space>
       ),
     },

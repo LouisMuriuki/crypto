@@ -15,7 +15,6 @@ function Widget({ text, number, color, icon }: Props) {
       hoverable
       className="relative mb-5 flex md:flex-row mr-1"
       style={{
-        width: "max-content",
         height: 100,
         // margin: "0 auto",
         padding: 0,
@@ -25,8 +24,8 @@ function Widget({ text, number, color, icon }: Props) {
         className="absolute  h-full w-[5px]  rounded-l-md"
         style={{ top: 0, left: 0, backgroundColor: color }}
       ></div>
-      <div className="flex flex-row w-[120px] md:w-full ">
-        <div className="flex flex-col justify-around">
+      <div className="flex flex-row w-[120px] md:w-[250px] ">
+        <div className="flex flex-col justify-around w-[100%]">
           <div className=" flex w-full items-center justify-around md:justify-between ">
             <h3 className="m-0 p-1 text-sm md:text-xl">{text}</h3>
             <div className="flex justify-end pl-6">
