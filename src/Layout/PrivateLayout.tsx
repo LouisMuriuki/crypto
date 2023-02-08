@@ -111,6 +111,10 @@ const PrivateLayout = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const handleMenuClick=()=>{
+    setCollapsed(true)
+  }
+
   const Theme = useTheme();
   const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
 
@@ -128,8 +132,6 @@ const PrivateLayout = () => {
         </div>
       );
     });
-
-  
 
   useEffect(() => {
     const intervalId = setInterval(() => setTime(new Date()), 1000);
@@ -189,7 +191,7 @@ const PrivateLayout = () => {
                   }
                 >
                   {item.children.map((child) => (
-                    <Menu.Item key={child.key}>
+                    <Menu.Item key={child.key} onClick={handleMenuClick}>
                       {child.icon}
                       {child.to ? (
                         <Link to={child.to}>{child.title}</Link>
@@ -202,7 +204,7 @@ const PrivateLayout = () => {
               );
             } else {
               return (
-                <Menu.Item key={item.key}>
+                <Menu.Item key={item.key} onClick={handleMenuClick}>
                   {item.icon}
                   {item.to ? (
                     <Link to={item.to}>{item.title}</Link>
@@ -242,7 +244,7 @@ const PrivateLayout = () => {
               flexDirection: "column",
             }}
           >
-            <span className="text-sm md:text-xl font-bold leading-none">
+            <span className="text-base md:text-xl font-bold leading-none text-[#00308f]">
               BizPlus Limited
             </span>
             <div className="flex flex-row items-center leading-none">
@@ -305,15 +307,18 @@ const PrivateLayout = () => {
             </div>
           </div>
         </Header>
-        <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }} className="breadcrumbs">
+        <Content style={{ margin: isMobile ? "0 5px" : "0 16px" }}>
+          <Breadcrumb
+            style={{ margin: isMobile ? "3px 0" : "16px 0" }}
+            className="breadcrumbs"
+          >
             <Breadcrumb.Item>{crumbs}</Breadcrumb.Item>
           </Breadcrumb>
           <div
             style={{
               padding: isMobile ? 10 : 24,
               minHeight: 360,
-              backgroundColor:"#f5f5f5"
+              backgroundColor: "#f5f5f5",
             }}
           >
             <Outlet />

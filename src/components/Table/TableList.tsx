@@ -72,7 +72,7 @@ const TableList: React.FC = () => {
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Space size="middle">
+        <Space size="middle" style={{backgroundColor:"white"}}>
           <Button onClick={()=>navigate("2")} type="primary">Info</Button>
           <DeleteOutlined style={{ fontSize: "26px",color: 'red' }} onClick={() => setAsyncConfirmOpen(true)} />
         </Space>
@@ -126,7 +126,7 @@ const TableList: React.FC = () => {
 
   return (
     <Table
-      className="w-full overflow-x-auto"
+      className="w-full overflow-x-auto bg-white"
       columns={columns}
       rowKey={(record) => record.login.uuid}
       dataSource={data}
