@@ -111,12 +111,12 @@ const PrivateLayout = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const handleMenuClick=()=>{
-    setCollapsed(true)
-  }
-
   const Theme = useTheme();
   const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
+  
+  const handleMenuClick = () => {
+    isMobile && setCollapsed(true);
+  };
 
   const location = useLocation();
   console.log(location);
