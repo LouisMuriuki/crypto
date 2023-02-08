@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Button, Drawer } from "antd";
 import DrawerContext from "../../context/DrawerContext";
 import {GrFormClose} from 'react-icons/gr'
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 const Notifications = [
   "The CEO has rescheduled today's meeting with Michael to tomorrow at 11 AM.",
   "The CFO has cancelled their meeting with the sales team due to a family emergency.",
@@ -17,7 +19,8 @@ const Notifications = [
 
 const NotificationDrawer: React.FC = () => {
   const { notificationsopen, setNotificationsOpen } = useContext(DrawerContext);
-
+  const Theme = useTheme();
+  const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
   const onClose = () => {
     setNotificationsOpen(false);
   };
@@ -29,6 +32,7 @@ const NotificationDrawer: React.FC = () => {
         placement="right"
         onClose={onClose}
         open={notificationsopen}
+        width={isMobile?310:378}
       >
         {Notifications.map((notification, i) => {
           return (

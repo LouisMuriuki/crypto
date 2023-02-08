@@ -7,6 +7,7 @@ import {
   BellOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 const ProfilePopup = () => {
   const {
     setNotificationsOpen,
@@ -19,6 +20,7 @@ const ProfilePopup = () => {
     setProfileModalOpen(false);
   };
 
+   const navigate=useNavigate()
   return (
     <>
       <Modal
@@ -51,6 +53,7 @@ const ProfilePopup = () => {
                 <Button
                   className="flex justify-start text-sm md:text-base"
                   type="text"
+                  onClick={() => [setNewMeetingOpen(true),setProfileModalOpen(false)]}
                   block
                 >
                   New Meeting
@@ -68,6 +71,7 @@ const ProfilePopup = () => {
                   className="flex justify-start text-sm md:text-base"
                   type="text"
                   block
+                  onClick={() => [setNotificationsOpen(true),setProfileModalOpen(false)]}
                 >
                   Notifications
                 </Button>
@@ -82,6 +86,7 @@ const ProfilePopup = () => {
                   className="flex justify-start text-sm md:text-base"
                   type="text"
                   block
+                  onClick={() => [setProfileModalOpen(false),navigate("/account")]}
                 >
                   Account
                 </Button>

@@ -10,10 +10,11 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Meetings from "./pages/meetings/Meetings";
 import NotFound from "./pages/notfound/NotFound";
-import Profile from "./pages/profile/Profile";
+import Account from "./pages/account/Account";
 import Reports from "./pages/reports/Reports";
 import Details from "./pages/staff/Details";
 import Staff from "./pages/staff/Staff";
+
 
 function App() {
   const router = createBrowserRouter(
@@ -30,7 +31,7 @@ function App() {
             <Route index element={<Meetings />} />
             <Route path="reports" element={<Reports />} />
           </Route>
-          <Route path="profile" element={<Profile />} />
+          <Route path="account" element={<Account />} />
           <Route path="login" element={<Login />} />
         </Route>
 

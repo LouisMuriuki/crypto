@@ -88,10 +88,10 @@ const items: MenuItem[] = [
     ]
   ),
   getItem(
-    "Profile",
+    "Account",
     "8",
     <UserOutlined style={{ fontSize: "16px" }} />,
-    "/profile"
+    "/account"
   ),
   getItem("Logout", "9", <PoweroffOutlined style={{ fontSize: "16px" }} />),
 ];
@@ -154,7 +154,7 @@ const PrivateLayout = () => {
           left: 0,
           top: 0,
           bottom: 0,
-          zIndex:1000
+          zIndex: 1000,
         }}
       >
         <div
@@ -293,6 +293,7 @@ const PrivateLayout = () => {
 
                 <div className="cursor-pointer">
                   <Avatar
+                    size={40}
                     onClick={() => setProfileModalOpen(true)}
                     src="https://media.istockphoto.com/id/1270067126/photo/smiling-indian-man-looking-at-camera.jpg?s=612x612&w=0&k=20&c=ovIQ5GPurLd3mOUj82jB9v-bjGZ8updgy1ACaHMeEC0="
                   />

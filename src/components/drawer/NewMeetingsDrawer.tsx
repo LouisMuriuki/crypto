@@ -3,6 +3,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
 import DrawerContext from '../../context/DrawerContext';
 import NewMeetingForm from '../forms/NewMeetingForm';
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const { Option } = Select;
 
@@ -13,11 +15,13 @@ const NewMeetingsDrawer: React.FC = () => {
     setNewMeetingOpen(false);
   };
 
+  const Theme = useTheme();
+  const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
   return (
     <>
       <Drawer
         title="Schedule a New Meeting"
-        width={720}
+        width={isMobile?310:720}
         onClose={onClose}
         open={newmeetingopen}
         bodyStyle={{ paddingBottom: 80 }}
