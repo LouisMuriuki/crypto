@@ -6,6 +6,8 @@ import LineChart from "../../components/charts/LineChart";
 import PieChart from "../../components/charts/PieChart";
 import RecentMeetings from "../../components/recentmeetings/RecentMeetings";
 import Widget from "../../components/widgets/Widget";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const header = ["Today", "This Month"];
 const options = header.map((option) => ({ label: option, value: option }));
@@ -14,52 +16,62 @@ const widgetdata = [
   {
     title: "Monthly Meetings ",
     number: 211,
-    icon:"BsBriefcaseFill"
+    icon: "BsBriefcaseFill",
   },
   {
     title: "Monthly Visitors",
     number: 261,
-    icon:"BsFillPeopleFill"
+    icon: "BsFillPeopleFill",
   },
   {
     title: "Todays Meetings",
     number: 21,
-    icon:"BsBriefcaseFill"
+    icon: "BsBriefcaseFill",
   },
   {
     title: "Todays Vistors",
     number: 21,
-    icon:"BsFillPeopleFill"
+    icon: "BsFillPeopleFill",
   },
 ];
 
 function Home() {
   const { Title } = Typography;
   // const homedata=useLoaderData()
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between mb-5 px-2">
-        <Title level={2}>GoodAfternoon Monica,</Title>
+        <Title level={isMobile?4:2}>GoodAfternoon Monica,</Title>
       </div>
       <div></div>
-      <div className="flex w-full mb-5 items-center justify-start">
+      <div className="flex w-full mb-5 md:items-center p-0 md:p-0.5 justify-around md:justify-between flex-wrap">
         {widgetdata.map((data, i) => {
-          return <Widget text={data.title} number={data.number} color={COLORS[i % COLORS.length]} icon={data.icon} />;
+          return (
+            <Widget
+              text={data.title}
+              number={data.number}
+              color={COLORS[i % COLORS.length]}
+              icon={data.icon}
+            />
+          );
         })}
       </div>
-      <div className="flex p-2">
-        <div className=" p-2" style={{ flex: 3 }}>
+      <div className="flex flex-col md:flex-row p-0 md:p-2">
+        <div className=" py-1 md:p-2" style={{ flex: 3 }}>
           <RecentMeetings />
         </div>
-        <div className=" p-2" style={{ flex: 2 }}>
+        <div className=" py-1 md:p-2" style={{ flex: 2 }}>
           <PieChart header={options} />
         </div>
       </div>
-      <div className="flex p-2">
-        <div className=" p-2" style={{ flex: 2 }}>
+      <div className="flex flex-col-reverse md:flex-row p-0 md:p-2">
+        <div className=" py-1 md:p-2" style={{ flex: 2 }}>
           <BarChart />
         </div>
-        <div className=" p-2" style={{ flex: 3 }}>
+        <div className=" py-1 md:p-2" style={{ flex: 3 }}>
           <LineChart />
         </div>
       </div>

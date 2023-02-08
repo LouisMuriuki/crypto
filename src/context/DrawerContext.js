@@ -7,6 +7,7 @@ export const DrawerContextProvider = ({ children }) => {
   const [asyncconfirmopen, setAsyncConfirmOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [newstaffmodalopen, setNewStaffModalOpen] = useState(false);
+  const [confirmStaffFormLoading, setConfirmStaffFormLoading] = useState(false);
   return (
     <DrawerContext.Provider
       value={{
@@ -16,9 +17,12 @@ export const DrawerContextProvider = ({ children }) => {
         setNewMeetingOpen,
         asyncconfirmopen,
         setAsyncConfirmOpen,
-        profileModalOpen, 
+        profileModalOpen,
         setProfileModalOpen,
-        newstaffmodalopen, setNewStaffModalOpen
+        newstaffmodalopen,
+        setNewStaffModalOpen,
+        confirmStaffFormLoading,
+        setConfirmStaffFormLoading,
       }}
     >
       {children}

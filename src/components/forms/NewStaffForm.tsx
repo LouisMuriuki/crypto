@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Input, Button, Radio, Select, Upload, DatePicker } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import DrawerContext from "../../context/DrawerContext";
 const { Option } = Select;
 
 const formItemLayout = {
@@ -31,9 +32,16 @@ const tailFormItemLayout = {
 function NewStaffForm() {
   const [form] = Form.useForm();
   const [imageUrl, setImageUrl] = useState("");
+  const { confirmStaffFormLoading,setConfirmStaffFormLoading, setNewStaffModalOpen } =
+    useContext(DrawerContext);
 
   const handleSubmit = (values: any) => {
     console.log("Received values of form: ", values);
+    setConfirmStaffFormLoading(true);
+    setTimeout(() => {
+      setNewStaffModalOpen(false);
+      setConfirmStaffFormLoading(false);
+    }, 2000);
   };
 
   const handleChange = (info: any) => {
@@ -149,9 +157,14 @@ function NewStaffForm() {
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Register
-        </Button>
+        <div className=" absolute  right-5 bottom-0">
+          <Button value="default" className="mr-4" htmlType="submit">
+            Cancel
+          </Button>
+          <Button type="primary" loading={confirmStaffFormLoading} htmlType="submit">
+            Register
+          </Button>
+        </div>
       </Form.Item>
     </Form>
   );

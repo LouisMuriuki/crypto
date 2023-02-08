@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Space, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { FilterValue, SorterResult } from "antd/es/table/interface";
 import qs from "qs";
+import { DeleteOutlined } from "@ant-design/icons";
 import AsyncConfirm from "../drawer/AsyncConfirm";
 import DrawerContext from "../../context/DrawerContext";
+import { useNavigate } from "react-router-dom";
 
 interface DataType {
   name: {
@@ -25,8 +27,6 @@ interface TableParams {
   filters?: Record<string, FilterValue>;
 }
 
-
-
 const getRandomuserParams = (params: TableParams) => ({
   results: params.pagination?.pageSize,
   page: params.pagination?.current,
@@ -43,7 +43,9 @@ const TableList: React.FC = () => {
     },
   });
 
-  const {asyncconfirmopen, setAsyncConfirmOpen}=useContext(DrawerContext)
+  const { asyncconfirmopen, setAsyncConfirmOpen } = useContext(DrawerContext);
+
+  const navigate=useNavigate()
 
   const columns: ColumnsType<DataType> = [
     {
@@ -71,10 +73,8 @@ const TableList: React.FC = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a>Invite {record.name.last}</a>
-          <AsyncConfirm title="Delete Staff?" description="are you sure you want to delete this user">
-            <a onClick={()=>setAsyncConfirmOpen(true)}>Delete</a>
-          </AsyncConfirm>
+          <Button onClick={()=>navigate("2")} type="primary">Info</Button>
+          <DeleteOutlined size={22} style={{ color: 'red' }} onClick={() => setAsyncConfirmOpen(true)} />
         </Space>
       ),
     },
@@ -126,6 +126,7 @@ const TableList: React.FC = () => {
 
   return (
     <Table
+      className="w-full overflow-x-auto"
       columns={columns}
       rowKey={(record) => record.login.uuid}
       dataSource={data}

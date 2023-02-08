@@ -5,16 +5,19 @@ import List from "../../components/list/List";
 import TableList from "../../components/Table/TableList";
 import HeaderContext from "../../context/HeaderContext";
 const header = ["Upcoming", "Rescheduled", "Cancelled"];
-const options = header.map(option => ({ label: option, value: option }));
+const options = header.map((option) => ({ label: option, value: option }));
 const Meetings = () => {
   const { headervalue, setHeaderValue } = useContext(HeaderContext);
   return (
-    <div>
-      <Header
-        header={options}
-        headervalue={headervalue}
-        setHeaderValue={setHeaderValue}
-      />
+    <div className="flex flex-col">
+      <div className="flex justify-end mb-4">
+        <Header
+          header={options}
+          headervalue={headervalue}
+          setHeaderValue={setHeaderValue}
+        />
+      </div>
+
       <TableList />
     </div>
   );

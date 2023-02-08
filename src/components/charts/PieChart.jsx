@@ -52,9 +52,9 @@ const PieChart = ({ header }) => {
   };
   return (
     <div className="bg-white shadow-md border p-1 w-full">
-      <div className="flex items-center px-3 justify-between">
-        <h1 className="text-lg underline underline-offset-4 ">Staff Engagements</h1>
-        <div>
+      <div className="flex flex-col px-3 ">
+        <h1 className="flex text-lg justify-center underline underline-offset-4 ">Staff Engagements</h1>
+        <div className="flex justify-end">
           <Header
             header={header}
             setHeaderValue={setHeaderValue}

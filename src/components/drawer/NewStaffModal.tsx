@@ -4,16 +4,9 @@ import DrawerContext from "../../context/DrawerContext";
 import NewStaffForm from "../forms/NewStaffForm";
 import "./modal.css"
 const NewStaffModal = () => {
-  const { newstaffmodalopen, setNewStaffModalOpen } = useContext(DrawerContext);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const { newstaffmodalopen, setNewStaffModalOpen,confirmStaffFormLoading } = useContext(DrawerContext);
 
-  const handleOk = () => {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setNewStaffModalOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
+  
 
   return (
     <>
@@ -21,11 +14,11 @@ const NewStaffModal = () => {
         title="Add New Staff"
         centered
         open={newstaffmodalopen}
-        confirmLoading={confirmLoading}
-        onOk={handleOk}
+        confirmLoading={confirmStaffFormLoading}
         className="flex flex-col"
         onCancel={() => setNewStaffModalOpen(false)}
-        width={1000}
+        width={950}
+        footer={null}
       >
         <div className="mt-8">
           <NewStaffForm />

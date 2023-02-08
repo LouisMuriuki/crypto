@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   PieChartOutlined,
   TeamOutlined,
@@ -10,7 +10,7 @@ import {
   DeliveredProcedureOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
-import {  BsBriefcaseFill } from "react-icons/bs";
+import { BsBriefcaseFill } from "react-icons/bs";
 import { Avatar, Badge, Button, Space, Typography } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, useLocation } from "react-router-dom";
@@ -18,8 +18,10 @@ import { NavLink, Outlet } from "react-router-dom";
 import "./layout.css";
 import DrawerContext from "../context/DrawerContext";
 import NotificationDrawer from "../components/drawer/NotificationDrawer";
-import NewMeetingsForm from "../components/drawer/NewMeetingsForm";
+import NewMeetingsForm from "../components/drawer/NewMeetingsDrawer";
 import ProfilePopup from "../components/drawer/ProfilePopup";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
 
@@ -54,7 +56,7 @@ const items: MenuItem[] = [
     "Staff",
     "sub1",
     <TeamOutlined style={{ fontSize: "16px" }} />,
-    "/staff/",
+    "/staff/"
     // [
     //   getItem("Manage", "2", <UsergroupAddOutlined />, "/staff/"),
     //   getItem(
@@ -68,10 +70,15 @@ const items: MenuItem[] = [
   getItem(
     "Meetings",
     "sub2",
-    <BsBriefcaseFill size={16} style={{marginRight:10}}/>,
+    <BsBriefcaseFill size={16} style={{ marginRight: 10 }} />,
     undefined,
     [
-      getItem("View", "6", <BsBriefcaseFill size={16} style={{marginRight:10}}/>, "/meetings/"),
+      getItem(
+        "View",
+        "6",
+        <BsBriefcaseFill size={16} style={{ marginRight: 10 }} />,
+        "/meetings/"
+      ),
       getItem(
         "Reports",
         "7",
@@ -91,10 +98,21 @@ const items: MenuItem[] = [
 
 const PrivateLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const { setNotificationsOpen, setNewMeetingOpen, profileModalOpen, setProfileModalOpen} = useContext(DrawerContext);
+  const [time, setTime] = useState(new Date());
+  const {
+    setNotificationsOpen,
+    setNewMeetingOpen,
+    profileModalOpen,
+    setProfileModalOpen,
+  } = useContext(DrawerContext);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const Theme = useTheme();
+  const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
+
   const location = useLocation();
   console.log(location);
   let currentLink: string = "";
@@ -109,6 +127,14 @@ const PrivateLayout = () => {
         </div>
       );
     });
+
+  useEffect(() => {
+    const intervalId = setInterval(() => setTime(new Date()), 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -128,6 +154,7 @@ const PrivateLayout = () => {
           left: 0,
           top: 0,
           bottom: 0,
+          zIndex:1000
         }}
       >
         <div
@@ -187,7 +214,7 @@ const PrivateLayout = () => {
       </Sider>
       <Layout
         className="site-layout"
-        style={{ marginLeft: collapsed ? 0 : 200 }}
+        style={{ marginLeft: isMobile ? 0 : collapsed ? 0 : 200 }}
       >
         <Header
           style={{
@@ -209,10 +236,32 @@ const PrivateLayout = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "flex-center",
+              flexDirection: "column",
             }}
           >
-            <h2>BizPlus Limited</h2>
+            <span className="text-sm md:text-xl font-bold leading-none">
+              BizPlus Limited
+            </span>
+            <div className="flex flex-row items-center leading-none">
+              <span className="text-xs md:text-base">
+                {time?.toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </span>
+              <span className="px-2">
+                <Badge dot color="black" size="small" />
+              </span>
+              <span className="time">
+                {time?.toLocaleString("en-US", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  second: "numeric",
+                  hour12: true,
+                })}
+              </span>
+            </div>
           </div>
           <div
             style={{
@@ -223,22 +272,30 @@ const PrivateLayout = () => {
           >
             <div style={{ paddingRight: 20 }} className="flex items-center">
               <Space size="large">
-                <Button
-                  onClick={() => setNewMeetingOpen(true)}
-                  className="flex items-center justify-center"
-                  icon={<PlusOutlined />}
-                >
-                  New Meeting
-                </Button>
-                <div onClick={() => setNotificationsOpen(true)}>
-                  <Badge dot>
-                    <BellOutlined
-                      style={{ fontSize: "20px", cursor: "pointer" }}
-                    />
-                  </Badge>
-                </div>
+                {isMobile ? null : (
+                  <>
+                    <Button
+                      onClick={() => setNewMeetingOpen(true)}
+                      className="flex items-center justify-center"
+                      icon={<PlusOutlined />}
+                    >
+                      New Meeting
+                    </Button>
+                    <div onClick={() => setNotificationsOpen(true)}>
+                      <Badge dot>
+                        <BellOutlined
+                          style={{ fontSize: "20px", cursor: "pointer" }}
+                        />
+                      </Badge>
+                    </div>
+                  </>
+                )}
+
                 <div className="cursor-pointer">
-                  <Avatar onClick={()=>setProfileModalOpen(true)} src="https://media.istockphoto.com/id/1270067126/photo/smiling-indian-man-looking-at-camera.jpg?s=612x612&w=0&k=20&c=ovIQ5GPurLd3mOUj82jB9v-bjGZ8updgy1ACaHMeEC0=" />
+                  <Avatar
+                    onClick={() => setProfileModalOpen(true)}
+                    src="https://media.istockphoto.com/id/1270067126/photo/smiling-indian-man-looking-at-camera.jpg?s=612x612&w=0&k=20&c=ovIQ5GPurLd3mOUj82jB9v-bjGZ8updgy1ACaHMeEC0="
+                  />
                 </div>
               </Space>
             </div>
@@ -250,7 +307,7 @@ const PrivateLayout = () => {
           </Breadcrumb>
           <div
             style={{
-              padding: 24,
+              padding: isMobile ? 10 : 24,
               minHeight: 360,
               background: colorBgContainer,
             }}
@@ -258,7 +315,7 @@ const PrivateLayout = () => {
             <Outlet />
             <NotificationDrawer />
             <NewMeetingsForm />
-            <ProfilePopup/>
+            <ProfilePopup />
           </div>
         </Content>
       </Layout>

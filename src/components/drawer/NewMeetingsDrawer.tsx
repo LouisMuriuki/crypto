@@ -2,12 +2,12 @@ import React, { useContext, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
 import DrawerContext from '../../context/DrawerContext';
+import NewMeetingForm from '../forms/NewMeetingForm';
 
 const { Option } = Select;
 
-const NewMeetingsForm: React.FC = () => {
+const NewMeetingsDrawer: React.FC = () => {
   const {newmeetingopen, setNewMeetingOpen}=useContext(DrawerContext)
-
 
   const onClose = () => {
     setNewMeetingOpen(false);
@@ -30,7 +30,7 @@ const NewMeetingsForm: React.FC = () => {
           </Space>
         }
       >
-        <Form layout="vertical" hideRequiredMark>
+        {/* <Form layout="vertical" requiredMark>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
@@ -124,10 +124,11 @@ const NewMeetingsForm: React.FC = () => {
               </Form.Item>
             </Col>
           </Row>
-        </Form>
+        </Form> */}
+        <NewMeetingForm/>
       </Drawer>
     </>
   );
 };
 
-export default NewMeetingsForm;
+export default NewMeetingsDrawer;
