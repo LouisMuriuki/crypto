@@ -23,7 +23,7 @@ function Widget({ text, number, color, icon }: Props) {
         className="absolute  h-full w-[5px]  rounded-l-md"
         style={{ top: 0, left: 0, backgroundColor: color }}
       ></div>
-      <div className="flex flex-row w-[160px] md:w-[250px] ">
+      <div className="flex flex-row w-[150px] md:w-[250px] ">
         <div className="flex flex-col justify-around w-[100%]">
           <div className=" flex w-full items-center justify-around md:justify-between ">
             <h3 className="m-0 p-1 text-sm md:text-xl">{text}</h3>
