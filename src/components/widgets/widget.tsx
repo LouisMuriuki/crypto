@@ -16,7 +16,6 @@ function Widget({ text, number, color, icon }: Props) {
       className="relative mb-5 flex md:flex-row mr-1"
       style={{
         height: 100,
-        // margin: "0 auto",
         padding: 0,
       }}
     >
