@@ -13,7 +13,7 @@ function Widget({ text, number, color, icon }: Props) {
     <Card
       size="small"
       hoverable
-      className="relative mb-5 flex md:flex-row mr-1"
+      className="relative mb-5 flex md:flex-row "
       style={{
         height: 100,
         padding: 0,
