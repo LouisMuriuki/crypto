@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { HeaderContextProvider } from "./context/HeaderContext";
-import {DrawerContextProvider} from "./context/DrawerContext";
+import { DrawerContextProvider } from "./context/DrawerContext";
+import { FilterContextProvider } from "./context/FilterContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,9 +12,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <DrawerContextProvider>
-      <HeaderContextProvider>
-        <App />
-      </HeaderContextProvider>
+      <FilterContextProvider>
+        <HeaderContextProvider>
+          <App />
+        </HeaderContextProvider>
+      </FilterContextProvider>
     </DrawerContextProvider>
   </React.StrictMode>
 );

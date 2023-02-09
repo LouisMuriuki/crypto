@@ -12,9 +12,9 @@ import Meetings from "./pages/meetings/Meetings";
 import NotFound from "./pages/notfound/NotFound";
 import Account from "./pages/account/Account";
 import Reports from "./pages/reports/Reports";
-import Details from "./pages/staff/Details";
+import Details from "./pages/staff/StaffDetails";
 import Staff from "./pages/staff/Staff";
-
+import ReportPage from "./pages/reports/ReportPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -29,7 +29,10 @@ function App() {
           </Route>
           <Route path="meetings">
             <Route index element={<Meetings />} />
-            <Route path="reports" element={<Reports />} />
+            <Route path="reports">
+              <Route index element={<Reports />} />
+              <Route path=":id" element={<ReportPage />} />
+            </Route>
           </Route>
           <Route path="account" element={<Account />} />
           <Route path="login" element={<Login />} />

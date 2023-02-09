@@ -113,13 +113,12 @@ const PrivateLayout = () => {
 
   const Theme = useTheme();
   const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
-  
+
   const handleMenuClick = () => {
     isMobile && setCollapsed(true);
   };
 
   const location = useLocation();
-  console.log(location);
   let currentLink: string = "";
   const crumbs = location.pathname
     .split("/")
@@ -134,7 +133,10 @@ const PrivateLayout = () => {
     });
 
   useEffect(() => {
-    const intervalId = setInterval(() => setTime(new Date()), 1000);
+    let intervalId :any
+    const updateTime = () => setTime(new Date());
+
+    intervalId = setInterval(updateTime, 1000);
     return () => {
       clearInterval(intervalId);
     };

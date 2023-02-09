@@ -2,7 +2,7 @@ import React from "react";
 import ReportCard from "../../components/reports/ReportCard";
 const reports = [
   {
-    title: "Check-in/Check-out reports",
+    title: "Check-in&Check-out reports",
     descrption: "This report shows all visitors who have checked in and checked out, including the date and time of their visits.",
   },
   {

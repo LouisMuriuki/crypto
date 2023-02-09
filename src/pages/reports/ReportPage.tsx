@@ -1,17 +1,18 @@
-import { DataGrid } from "@mui/x-data-grid";
 import React, { useContext } from "react";
+import Filter from "../../components/filter/Filter";
 import Header from "../../components/header/Header";
 import List from "../../components/list/List";
-import TableList from "../../components/Table/TableList";
 import HeaderContext from "../../context/HeaderContext";
-import "./meetings.css"
-const header = ["Upcoming", "Rescheduled", "Cancelled"];
+const header = ["Daily", "Monthly"];
 const options = header.map((option) => ({ label: option, value: option }));
-const Meetings = () => {
+const ReportPage = () => {
   const { headervalue, setHeaderValue } = useContext(HeaderContext);
   return (
-    <div className="flex flex-col">
-      <div className="flex justify-end mb-4">
+    <div>
+      <div className="flex mb-4">
+        <Filter />
+      </div>
+      <div className="flex justify-start mb-4">
         <Header
           bgcolor="#bac6d6"
           header={options}
@@ -19,10 +20,9 @@ const Meetings = () => {
           setHeaderValue={setHeaderValue}
         />
       </div>
-
-      <TableList />
+      <List />
     </div>
   );
 };
 
-export default Meetings;
+export default ReportPage;

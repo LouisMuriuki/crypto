@@ -55,7 +55,7 @@ export default function List({actionColumn}:Props) {
     <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
         rows={rows}
-        columns={columns.concat(actionColumn)}
+        columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection
