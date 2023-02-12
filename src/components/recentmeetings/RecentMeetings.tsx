@@ -48,7 +48,7 @@ const RecentMeetings = () => {
   const Colors=["#Abcdab","#d0c2b0","be5a43"]
   const { Title } = Typography;
   return (
-    <div className="flex flex-col bg-[#fff] shadow-md border h-[450px] md:h-[504px] ">
+    <div className="flex flex-col bg-[#fff] shadow-md border h-[450px] rounded md:h-[504px] ">
       <div className="flex items-center justify-center py-0">
         <h3 className="text-lg text-[#25385f]"> Upcoming Meetings</h3>
       </div>

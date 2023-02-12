@@ -31,7 +31,7 @@ const LineChart = () => {
   };
 
   return (
-    <div className="bg-white shadow-md border p-3">
+    <div className="bg-white rounded shadow-md border p-3">
        <h1 className='flex items-center justify-center text-[#25385f]'>Today's Engagements</h1>
       <Line {...config} />
     </div>

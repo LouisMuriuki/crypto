@@ -1,4 +1,4 @@
-import { Typography } from "antd";
+import { Typography, Row, Col } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import BarChart from "../../components/charts/BarChart";
@@ -56,7 +56,7 @@ function Home() {
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between mb-5 px-2">
-        <Title level={isMobile?4:2}>{greeting} Monica,</Title>
+        <Title level={isMobile ? 4 : 2}>{greeting} Monica,</Title>
       </div>
       <div></div>
       <div className="flex w-full mb-5 md:items-center p-0 md:p-2 justify-around md:justify-between flex-wrap">

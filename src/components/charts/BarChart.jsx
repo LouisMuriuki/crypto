@@ -31,9 +31,9 @@ const BarChart = () => {
   }
 
   return (
-    <div className="bg-white shadow-md border p-3">
+    <div className="rounded bg-white shadow-md border p-3">
       <h1 className='flex items-center justify-center text-[#25385f] '>This Week's Engagements</h1>
-      <Column {...config} />
+      <Column className='cursor-pointer' {...config} />
     </div>
   )
 }

@@ -145,7 +145,7 @@ const PrivateLayout = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
-        collapsible
+        collapsible={false}
         collapsed={collapsed}
         breakpoint="lg"
         zeroWidthTriggerStyle={{ position: "absolute", top: 0, marginTop: 12 }}
@@ -311,7 +311,7 @@ const PrivateLayout = () => {
         </Header>
         <Content style={{ margin: isMobile ? "0 5px" : "0 16px" }}>
           <Breadcrumb
-            style={{ margin: isMobile ? "3px 0" : "16px 0" }}
+            style={{ margin: isMobile ? "3px 17px" : "10px 30px" }}
             className="breadcrumbs"
           >
             <Breadcrumb.Item>{crumbs}</Breadcrumb.Item>
