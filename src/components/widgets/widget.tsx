@@ -23,10 +23,10 @@ function Widget({ text, number, color, icon }: Props) {
         className="absolute  h-full w-[5px]  rounded-l-md"
         style={{ top: 0, left: 0, backgroundColor: color }}
       ></div>
-      <div className="flex flex-row m w-[125px] md:w-[250px] lg:w-[230px] ">
+      <div className="flex flex-row m w-[125px] md:w-[250px] lg:w-[200px] ">
         <div className="flex flex-col justify-around w-[100%]">
           <div className=" flex w-full items-center justify-around md:justify-between ">
-            <h3 className="m-0 p-1 text-sm md:text-xl">{text}</h3>
+            <h3 className="m-0 p-1 text-sm md:text-xl lg:text-base">{text}</h3>
             <div className="flex justify-end pl-6">
               {icon === "BsFillPeopleFill" ? (
                 <BsFillPeopleFill size={18} color={color} />

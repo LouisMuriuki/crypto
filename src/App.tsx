@@ -15,12 +15,27 @@ import Reports from "./pages/reports/Reports";
 import Details from "./pages/staff/StaffDetails";
 import Staff from "./pages/staff/Staff";
 import ReportPage from "./pages/reports/ReportPage";
+import PublicLayout from "./Layout/PublicLayout";
+import Register from "./pages/register/Register";
+import RegisterVerification from "./pages/registerverification/RegisterVerification";
+import ResetPassword from "./pages/resetpassword/ResetPassword";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<PrivateLayout />}>
-        <Route path="/">
+      <Route path="/">
+        <Route element={<PublicLayout />}>
+          <Route path="login" >
+          <Route index element={<Login />} />
+          <Route path="verification" element={<RegisterVerification/>} />
+          <Route path="resetpassword" element={<ResetPassword/>} />
+          </Route>
+          <Route path="register">
+            <Route index element={<Register />} />
+            <Route path="verification" element={<RegisterVerification />} />
+          </Route>
+        </Route>
+        <Route element={<PrivateLayout />}>
           <Route index element={<Home />} />
           <Route path="dashboard" element={<Home />} />
           <Route path="staff">
@@ -36,9 +51,9 @@ function App() {
           </Route>
           <Route path="account" element={<Account />} />
           <Route path="login" element={<Login />} />
-        </Route>
 
-        <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Route>
     )
   );

@@ -33,6 +33,7 @@ const PieChart = ({ header }) => {
     return {
       animationDuration: 500,
       animationEasing: "elasticOut",
+      
     };
   };
   const config = {
@@ -48,6 +49,7 @@ const PieChart = ({ header }) => {
       style: {
         fontSize: 14,
         textAlign: "center",
+        cursor:"pointer"
       },
     },
     interactions: [
@@ -71,8 +73,15 @@ const PieChart = ({ header }) => {
           />
         </div>
       </div>
-
-      <Pie style={{cursor:"pointer"}} hasLegend animate={false} subTitle="Pie Chart" onMouseEnter={onMouseEnter} {...config} />
+      <div style={{ cursor: "pointer" }}>
+        <Pie
+          hasLegend
+          animate={false}
+          subTitle="Pie Chart"
+          onMouseEnter={onMouseEnter}
+          {...config}
+        />
+      </div>
     </div>
   );
 };

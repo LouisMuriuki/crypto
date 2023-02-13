@@ -1,87 +1,40 @@
-import React, { useState } from 'react';
-import { Form, Input, Button } from 'antd';
-import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
-import axios from 'axios';
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import RegisterForm from "../../components/forms/RegisterForm";
+import { Form } from "antd";
 interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = () => {
-  const [form] = Form.useForm();
-  const [error, setError] = useState<string>('');
-  const [isloading, setIsLoading] = useState<boolean>(false);
-
-
-  const onFinish = async (values: any) => {
-    setIsLoading(true);
-    try {
-      await axios.post('/api/register', values);
-      // If the request is successful, redirect the user to the login page
-      // You can use the `useHistory` hook from the `react-router-dom` library to do this
-    } catch (err:any) {
-      setError(err.response.data.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <div className="register-container">
-      <Form
-        form={form}
-        name="normal_register"
-        className="register-form"
-        onFinish={onFinish}
-      >
-        <Form.Item
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
-        >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
+    <div className="flex ">
+      <div className="w-1/3 p-4 h-[100%] bg-blue-600">
+        <div className="flex w-full items-center h-[screen] my-auto bg-blue-600">
+          <img
+            src={
+              "https://images.unsplash.com/photo-1509822929063-6b6cfc9b42f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            }
+            className="object-contain w-[100%] h-screen"
+            alt={"mgeni karibu"}
           />
-        </Form.Item>
-        <Form.Item
-          name="email"
-          rules={[            {              type: 'email',              message: 'The input is not valid E-mail!',            },            {              required: true,              message: 'Please input your E-mail!',            },          ]}
-        >
-          <Input
-            prefix={<MailOutlined className="site-form-item-icon" />}
-            placeholder="Email"
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[            {              required: true,              message: 'Please input your password!',            },          ]}
-        >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Item>
-
-        <Form.Item
-          name="confirm"
-          dependencies={['password']}
-          hasFeedback
-          rules={[            {              required: true,              message: 'Please confirm your password!',            },            ({ getFieldValue }) => ({              validator(rule, value) {                if (!value || getFieldValue('password') === value) {                  return Promise.resolve();                }                return Promise.reject('The two passwords that you entered do not match!');              },            }),          ]}
-        >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Confirm Password"
-          />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" className="register-form-button">
-            Register
-          </Button>
-        </Form.Item>
-        {error && <div className="error-message">{error}</div>}
-      </Form>
+        </div>
+      </div>
+      <div className=" w-2/3 p-4 ">
+        <div className="flex w-full items-center h-[100%] mx-auto">
+          <div className="flex flex-col">
+            <RegisterForm />
+            <Form>
+              <p className="w-full md:px-20 text-base">
+                Already have an account?{" "}
+                <span>
+                  {" "}
+                  <Link to="/login">Login here</Link>
+                </span>
+              </p>
+            </Form>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 export default Register;
-

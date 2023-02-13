@@ -148,6 +148,7 @@ const PrivateLayout = () => {
         collapsible={false}
         collapsed={collapsed}
         breakpoint="lg"
+        defaultCollapsed={isMobile?true:false}
         zeroWidthTriggerStyle={{ position: "absolute", top: 0, marginTop: 12 }}
         collapsedWidth="0"
         onBreakpoint={(broken) => {
@@ -309,7 +310,7 @@ const PrivateLayout = () => {
             </div>
           </div>
         </Header>
-        <Content style={{ margin: isMobile ? "0 5px" : "0 16px" }}>
+        <Content style={{ margin: isMobile ? "0 5px" : "0 16px",zIndex:collapsed?1000:0 }}>
           <Breadcrumb
             style={{ margin: isMobile ? "3px 17px" : "10px 30px" }}
             className="breadcrumbs"
