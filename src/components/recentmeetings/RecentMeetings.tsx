@@ -45,7 +45,7 @@ const meetings = [
 const RecentMeetings = () => {
   const Theme = useTheme();
   const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
-  const Colors=["#Abcdab","#d0c2b0","be5a43"]
+  const Colors = ["#Abcdab", "#d0c2b0", "be5a43"];
   const { Title } = Typography;
   return (
     <div className="flex flex-col bg-[#fff] shadow-md border h-[450px] rounded md:h-[504px] ">
@@ -55,7 +55,10 @@ const RecentMeetings = () => {
       <div className="w-full mb-4 overflow-auto p-1 md:p-2 scrollbar-hide">
         {meetings.map((meeting, i) => {
           return (
-            <div className="w-full md:h-[100px] bg-[#f5f5f5] flex items-center justify-center p-1 rounded-md border border-gray-700 shadow-md mb-6">
+            <div
+              key={i}
+              className="w-full md:h-[100px] bg-[#f5f5f5] flex items-center justify-center p-1 rounded-md border border-gray-700 shadow-md mb-6"
+            >
               <div className="p-2 md:p-4 w-1/5">
                 <div className="flex items-center justify-center p-1 rounded-md border border-gray-100 shadow-sm bg-[#Abcdab]">
                   <h2 className="text-xs md:text-base text-[#242424]">CEO</h2>
@@ -65,24 +68,29 @@ const RecentMeetings = () => {
                 <h5 className=" text-xs md:text-lg py-1 leading-3 my-auto">
                   {meeting.meetingTitle}
                 </h5>
-                <p className="text-xs md:text-base py-1 my-auto">{meeting.timeRange}</p>
+                <p className="text-xs md:text-base py-1 my-auto">
+                  {meeting.timeRange}
+                </p>
               </div>
               <div className="p-1 flex items-center justify-center w-1/5">
-                {meeting.imageUrls.slice(0,2).map((image, i) => {
+                {meeting.imageUrls.slice(0, 2).map((image, i) => {
                   return (
                     <img
+                      key={i}
                       src={image}
                       alt="react logo"
                       className="rounded-full border border-gray-100 shadow-sm"
                       style={{
-                        width: isMobile?"20px":"30px",
-                        height: isMobile?"20px":"30px",
+                        width: isMobile ? "20px" : "30px",
+                        height: isMobile ? "20px" : "30px",
                         objectFit: "cover",
                       }}
                     />
                   );
                 })}
-                {meeting.imageUrls.length>2&&<p className="text-xs">+{meeting.imageUrls.length-2}</p>}
+                {meeting.imageUrls.length > 2 && (
+                  <p className="text-xs">+{meeting.imageUrls.length - 2}</p>
+                )}
               </div>
             </div>
           );

@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import RegisterForm from "../../components/forms/RegisterForm";
 import { Form } from "antd";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 interface RegisterProps {}
 
-const Register: React.FC<RegisterProps> = () => {
+const Register: React.FC<RegisterProps> = () => {  
+  const Theme = useTheme();
+  const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
+
+  
   return (
     <div className="flex ">
-      <div className="w-1/3 p-4 h-[100%] bg-blue-600">
+   { isMobile?null:  <div className="w-1/3 p-4 h-[100%] bg-blue-600">
         <div className="flex w-full items-center h-[screen] my-auto bg-blue-600">
           <img
             src={
@@ -17,10 +23,10 @@ const Register: React.FC<RegisterProps> = () => {
             alt={"mgeni karibu"}
           />
         </div>
-      </div>
-      <div className=" w-2/3 p-4 ">
+      </div>}
+      <div className=" w-full md:w-2/3 p-4 ">
         <div className="flex w-full items-center h-[100%] mx-auto">
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center w-full justify-center">
             <RegisterForm />
             <Form>
               <p className="w-full md:px-20 text-base">

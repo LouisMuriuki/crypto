@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Typography, message } from "antd";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 const { Text } = Typography;
 
 interface ResetPasswordProps {}
@@ -8,6 +9,9 @@ interface ResetPasswordProps {}
 const ResetPassword: React.FC<ResetPasswordProps> = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const Theme = useTheme();
+  const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
+
 
   const handleSubmit = async () => {
     try {
@@ -26,7 +30,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
 
   return (
     <div className="flex items-center justify-center h-[100vh]">
-      <div className="w-[400px] shadow-md p-10">
+      <div className="w-full md:w-[450px] shadow-md m-3 p-2 md:p-10">
         <Form form={form} layout="vertical">
         <Form.Item
             name="password"
@@ -38,7 +42,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
               },
             ]}
           >
-            <Input.Password size="large" placeholder="Password" />
+            <Input.Password size={isMobile?"middle":"large"} placeholder="Password" />
           </Form.Item>
           <Form.Item
             name="password"
@@ -50,12 +54,12 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
               },
             ]}
           >
-            <Input.Password size="large" placeholder="Confirm Password" />
+            <Input.Password size={isMobile?"middle":"large"} placeholder="Confirm Password" />
           </Form.Item>
           <Form.Item>
             <Button
               type="primary"
-              size="large"
+              size={isMobile?"middle":"large"} 
               loading={loading}
               onClick={handleSubmit}
             >

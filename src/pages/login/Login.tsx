@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 interface LoginProps {}
 
 const Login: React.FC<LoginProps> = () => {
   const [form] = Form.useForm();
   const [error, setError] = useState("");
   const [termschecked, setTermsChecked] = useState(true);
+
+  const Theme = useTheme();
+  const isMobile = useMediaQuery(Theme.breakpoints.down("sm"));
 
   const onFinish = (values: any) => {
     // Send login request to the server
@@ -18,10 +22,10 @@ const Login: React.FC<LoginProps> = () => {
 
   return (
     <div className="flex">
-      <div className=" w-1/2 p-4 ">
+      <div className=" w-full md:w-1/2 p-1 md:p-4 ">
         <div className="flex w-full items-center h-[100%] mx-auto">
-          <div className="flex w-[100%] flex-col px-10 ">
-            <h2>Login in to your Account</h2>
+          <div className="flex w-[100%] flex-col px-5 md:px-10 ">
+            <h2 className="text-lg md:text-xl">Login in to your Account</h2>
             <p>welcome back! Please login</p>
             <Form
               form={form}
@@ -39,7 +43,7 @@ const Login: React.FC<LoginProps> = () => {
                 <Input
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Username"
-                  className="py-2 leading-3"
+                  size={isMobile?"middle":"large"} 
                 />
               </Form.Item>
               <Form.Item
@@ -51,7 +55,7 @@ const Login: React.FC<LoginProps> = () => {
                 <Input
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
-                  className="py-2"
+                  size={isMobile?"middle":"large"} 
                   placeholder="Password"
                 />
               </Form.Item>
@@ -70,6 +74,7 @@ const Login: React.FC<LoginProps> = () => {
                 <Button
                   type="primary"
                   htmlType="submit"
+                  size={isMobile?"middle":"large"} 
                   className="w-full mt-2"
                 >
                   Log in
@@ -90,7 +95,7 @@ const Login: React.FC<LoginProps> = () => {
           </div>
         </div>
       </div>
-      <div className="w-1/2 p-4 h-[100%] bg-blue-600">
+      {isMobile?null:<div className="w-1/2 p-4 h-[100%] bg-blue-600">
         <div className="flex w-full items-center h-[screen] my-auto bg-blue-600">
           <img
             src={
@@ -100,7 +105,7 @@ const Login: React.FC<LoginProps> = () => {
             alt={"mgeni karibu"}
           />
         </div>
-      </div>
+      </div>}
     </div>
   );
 };

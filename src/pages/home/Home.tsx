@@ -63,6 +63,7 @@ function Home() {
         {widgetdata.map((data, i) => {
           return (
             <Widget
+              key={i}
               text={data.title}
               number={data.number}
               color={COLORS[i % COLORS.length]}

@@ -177,6 +177,8 @@ const PrivateLayout = () => {
         </div>
         <Menu
           theme="dark"
+          inlineCollapsed={collapsed}
+          onSelect={()=>{}}
           // defaultSelectedKeys={["1"]}
           mode="inline"
           style={{ paddingTop: 10 }}
@@ -186,6 +188,7 @@ const PrivateLayout = () => {
               return (
                 <SubMenu
                   key={item.key}
+                  onTitleClick={() => {}}
                   title={
                     <span>
                       {item.icon}
@@ -207,7 +210,7 @@ const PrivateLayout = () => {
               );
             } else {
               return (
-                <Menu.Item key={item.key} onClick={handleMenuClick}>
+                <Menu.Item  key={item.key} onClick={handleMenuClick} >
                   {item.icon}
                   {item.to ? (
                     <Link to={item.to}>{item.title}</Link>

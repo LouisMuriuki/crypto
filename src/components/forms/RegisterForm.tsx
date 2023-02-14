@@ -36,7 +36,7 @@ const RegisterForm = () => {
       form={form}
       name="company-form"
       onFinish={onFinish}
-      className="w-full md:px-20"
+      className="w-full md:px-20 "
       layout="vertical"
       scrollToFirstError
     >
