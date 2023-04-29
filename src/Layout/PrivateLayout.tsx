@@ -22,8 +22,26 @@ import NewMeetingsForm from "../components/drawer/NewMeetingsDrawer";
 import ProfilePopup from "../components/drawer/ProfilePopup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import Pill from "../components/pill/Pill";
+import type { MenuProps } from "antd";
+import { Dropdown } from "antd";
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
+
+const Menuitems: MenuProps["items"] = [
+  {
+    key: "1",
+    label: <Pill image="" text="wq23456yqhvgq" size="small" variant="filled" />,
+  },
+  {
+    key: "2",
+    label: <Pill image="" text="wq23456yqhvgq" size="small" variant="filled" />,
+  },
+  {
+    key: "3",
+    label: <Pill image="" text="wq23456yqhvgq" size="small" variant="filled" />,
+  },
+];
 
 interface MenuItem {
   title: string;
@@ -133,7 +151,7 @@ const PrivateLayout = () => {
     });
 
   useEffect(() => {
-    let intervalId :any
+    let intervalId: any;
     const updateTime = () => setTime(new Date());
 
     intervalId = setInterval(updateTime, 1000);
@@ -148,8 +166,8 @@ const PrivateLayout = () => {
         collapsible={false}
         collapsed={collapsed}
         breakpoint="lg"
-        defaultCollapsed={isMobile?true:false}
-        zeroWidthTriggerStyle={{ position: "absolute", top: 0, marginTop: 12 }}
+        defaultCollapsed={isMobile ? true : false}
+        zeroWidthTriggerStyle={{ position: "absolute", top: 0, marginTop: 12,background:"#141414" }}
         collapsedWidth="0"
         onBreakpoint={(broken) => {
           console.log(broken);
@@ -163,6 +181,7 @@ const PrivateLayout = () => {
           top: 0,
           bottom: 0,
           zIndex: 1000,
+          background: "#141414",
         }}
       >
         <div
@@ -171,17 +190,22 @@ const PrivateLayout = () => {
             margin: 16,
           }}
         >
-          <Title level={4} style={{ color: "#FFF" }}>
-            MGENI KARIBU
-          </Title>
+          <span
+            className=" flex text-2xl font-bold text-[#FF8042] items-center justify-center"
+          >
+            $COINSIFY
+          </span>
+          {/* <Dropdown  menu={{ items }} placement="bottomLeft" arrow>
+          <Pill color="white" image="" text="wqtrwtyqhvgq" size="small" variant="filled"/>
+    </Dropdown> */}
         </div>
         <Menu
           theme="dark"
           inlineCollapsed={collapsed}
-          onSelect={()=>{}}
+          onSelect={() => {}}
           // defaultSelectedKeys={["1"]}
           mode="inline"
-          style={{ paddingTop: 10 }}
+          style={{ paddingTop: 10, background: "#141414" }}
         >
           {items.map((item) => {
             if (item.children) {
@@ -210,7 +234,7 @@ const PrivateLayout = () => {
               );
             } else {
               return (
-                <Menu.Item  key={item.key} onClick={handleMenuClick} >
+                <Menu.Item key={item.key} onClick={handleMenuClick}>
                   {item.icon}
                   {item.to ? (
                     <Link to={item.to}>{item.title}</Link>
@@ -242,7 +266,11 @@ const PrivateLayout = () => {
               alignItems: "center",
               justifyContent: "flex-center",
             }}
-          ></div>
+          >
+            <p className="pl-12 text-base font-mono  ">
+              Hello Monica,
+            </p>
+          </div>
           <div
             style={{
               display: "flex",
@@ -250,10 +278,7 @@ const PrivateLayout = () => {
               flexDirection: "column",
             }}
           >
-            <span className="text-base md:text-xl font-bold leading-none text-[#00308f]">
-              BizPlus Limited
-            </span>
-            <div className="flex flex-row items-center leading-none">
+            <div className="flex flex-col md:flex-row  items-center font-mono leading-none">
               <span className="text-xs md:text-base">
                 {time?.toLocaleDateString("en-GB", {
                   day: "numeric",
@@ -287,10 +312,10 @@ const PrivateLayout = () => {
                   <>
                     <Button
                       onClick={() => setNewMeetingOpen(true)}
-                      className="flex items-center justify-center"
+                      className="flex items-center font-mono justify-center"
                       icon={<PlusOutlined />}
                     >
-                      New Meeting
+                      New Wallet
                     </Button>
                     <div onClick={() => setNotificationsOpen(true)}>
                       <Badge dot>
@@ -313,7 +338,12 @@ const PrivateLayout = () => {
             </div>
           </div>
         </Header>
-        <Content style={{ margin: isMobile ? "0 5px" : "0 16px",zIndex:collapsed?1000:0 }}>
+        <Content
+          style={{
+            margin: isMobile ? "0 5px" : "0 16px",
+            zIndex: collapsed ? 1000 : 0,
+          }}
+        >
           <Breadcrumb
             style={{ margin: isMobile ? "3px 17px" : "10px 30px" }}
             className="breadcrumbs"
@@ -324,7 +354,7 @@ const PrivateLayout = () => {
             style={{
               padding: isMobile ? 10 : 24,
               minHeight: 360,
-              backgroundColor: "#f5f5f5",
+              backgroundColor: "#000",
             }}
           >
             <Outlet />

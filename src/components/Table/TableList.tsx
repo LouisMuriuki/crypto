@@ -7,17 +7,13 @@ import { DeleteOutlined } from "@ant-design/icons";
 import AsyncConfirm from "../drawer/AsyncConfirm";
 import DrawerContext from "../../context/DrawerContext";
 import { useNavigate } from "react-router-dom";
-
+import {Coins} from "../../source"
 interface DataType {
-  name: {
-    first: string;
-    last: string;
-  };
-  gender: string;
-  email: string;
-  login: {
-    uuid: string;
-  };
+  name:string
+  balance: number;
+  price: string
+  value:string
+  imageUrl:string;
 }
 
 interface TableParams {
@@ -52,60 +48,33 @@ const TableList: React.FC = () => {
       title: "Name",
       dataIndex: "name",
       sorter: true,
-      render: (name) => `${name.first} ${name.last}`,
-      width: "20%",
-    },
-    {
-      title: "Gender",
-      dataIndex: "gender",
-      filters: [
-        { text: "Male", value: "male" },
-        { text: "Female", value: "female" },
-      ],
-      width: "20%",
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-    },
-    {
-      title: "Action",
-      key: "action",
       render: (_, record) => (
-        <Space size="middle" style={{backgroundColor:"white"}}>
-          <Button onClick={()=>navigate(record.name.first)} type="primary">Info</Button>
-          <DeleteOutlined style={{ fontSize: "22px",color: 'red' }} onClick={() => setAsyncConfirmOpen(true)} />
+        <Space size="middle" >
+          <img className="w-8 h-8 " src={record.imageUrl} />
+          <span>{record.name}</span>
         </Space>
       ),
+      
+    },
+    {
+      title: "Balances",
+      dataIndex: "balance",
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+    },
+    {
+      title: "Value",
+      dataIndex: "value",
+     
     },
   ];
 
-  const fetchData = () => {
-    setLoading(true);
-    fetch(
-      `https://randomuser.me/api?${qs.stringify(
-        getRandomuserParams(tableParams)
-      )}`
-    )
-      .then((res) => res.json())
-      .then(({ results }) => {
-        setData(results);
-        setLoading(false);
-        setTableParams({
-          ...tableParams,
-          pagination: {
-            ...tableParams.pagination,
-            total: 200,
-            // 200 is mock data, you should read it from server
-            // total: data.totalCount,
-          },
-        });
-      });
-  };
 
   useEffect(() => {
-    fetchData();
-  }, [JSON.stringify(tableParams)]);
+    setData(Coins)
+  }, []);
 
   const handleTableChange = (
     pagination: TablePaginationConfig,
@@ -126,9 +95,9 @@ const TableList: React.FC = () => {
 
   return (
     <Table
-      className="w-full overflow-x-auto bg-white"
+      className="w-full overflow-x-auto bg-[#141414]"
       columns={columns}
-      rowKey={(record) => record.login.uuid}
+      rowKey={(record) => record.name}
       dataSource={data}
       pagination={tableParams.pagination}
       loading={loading}

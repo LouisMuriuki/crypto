@@ -56,7 +56,7 @@ const ProfilePopup = () => {
                   onClick={() => [setNewMeetingOpen(true),setProfileModalOpen(false)]}
                   block
                 >
-                  New Meeting
+                  New Wallet
                 </Button>
               </div>
             </div>

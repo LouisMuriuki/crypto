@@ -5,12 +5,17 @@ import App from "./App";
 import { HeaderContextProvider } from "./context/HeaderContext";
 import { DrawerContextProvider } from "./context/DrawerContext";
 import { FilterContextProvider } from "./context/FilterContext";
-
+import {ConfigProvider, theme } from 'antd';
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <ConfigProvider
+    theme={{
+      algorithm: theme.darkAlgorithm,
+    }}
+  >
     <DrawerContextProvider>
       <FilterContextProvider>
         <HeaderContextProvider>
@@ -18,6 +23,7 @@ root.render(
         </HeaderContextProvider>
       </FilterContextProvider>
     </DrawerContextProvider>
+    </ConfigProvider>
   </React.StrictMode>
 );
 

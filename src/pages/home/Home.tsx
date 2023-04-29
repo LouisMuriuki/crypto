@@ -9,40 +9,101 @@ import RecentMeetings from "../../components/recentmeetings/RecentMeetings";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import Widget from "../../components/widgets/widget";
-
+import Pill from "../../components/pill/Pill";
+import TableList from "../../components/Table/TableList";
+import { BiWallet } from "react-icons/bi";
 const header = ["Today", "This Month"];
 const options = header.map((option) => ({ label: option, value: option }));
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ["primary", "secondary", "error", "info", "success", "warning"];
+
+const COLORS2 = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const widgetdata = [
   {
-    title: "Monthly Meetings ",
-    number: 211,
+    title: "Net worth ",
+    number: " $400,012,040",
     icon: "BsBriefcaseFill",
   },
   {
-    title: "Monthly Visitors",
-    number: 261,
+    title: "Total rewards",
+    number: "$0",
     icon: "BsFillPeopleFill",
   },
   {
-    title: "Todays Meetings",
-    number: 21,
+    title: "Total coins",
+    number: "$5000",
     icon: "BsBriefcaseFill",
   },
   {
-    title: "Todays Vistors",
-    number: 21,
+    title: "Total debts",
+    number: "$121",
     icon: "BsFillPeopleFill",
   },
 ];
-
+const Coins = [
+  {
+    imageUrl: "",
+    name: "All",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png",
+    name: "Bitcoin",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png",
+    name: "Ethereum",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/3794.png",
+    name: "Litecoin",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/6528.png",
+    name: "Ripple",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png",
+    name: "Cardano",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/74.png",
+    name: "Dogecoin",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png",
+    name: "Binance Coin",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png",
+    name: "Polkadot",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png",
+    name: "Chainlink",
+  },
+  {
+    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png",
+    name: "Solana",
+  },
+];
 function Home() {
   const { Title } = Typography;
   let time = new Date();
   // const homedata=useLoaderData()
   const [greeting, setGreeting] = useState<string>("");
   let hours = time.getHours();
+  const [variant, setVariant] = useState<"filled" | "outlined">("outlined");
 
+  const onClick = (clickedCoin: any) => {
+    const updatedCoins = Coins.map((coin) => {
+      if (coin.name === clickedCoin.name) {
+        // Update variant of clicked coin
+        return { ...coin, variant: "filled" };
+      } else {
+        // Keep variant of other coins
+        return coin;
+      }
+    });
+  };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -53,10 +114,24 @@ function Home() {
       ? setGreeting("GoodAfternoon")
       : setGreeting("GoodEvening");
   }, []);
+
   return (
     <div className="flex flex-col">
-      <div className="flex items-center justify-between mb-5 px-2">
-        <Title level={isMobile ? 4 : 2}>{greeting} Monica,</Title>
+      <div className="flex items-center justify-between mb-5 flex-wrap">
+        {Coins.map((coin, i) => {
+          return (
+            <div className="px-[1px] py-[4px] " key={i}>
+              <Pill
+                image={coin.imageUrl}
+                text={coin.name}
+                size="medium"
+                color={COLORS[i % COLORS.length]}
+                onClick={() => onClick(coin)}
+                variant={variant}
+              />
+            </div>
+          );
+        })}
       </div>
       <div></div>
       <div className="flex w-full mb-5 md:items-center p-0 md:p-2 justify-around md:justify-between flex-wrap">
@@ -66,28 +141,23 @@ function Home() {
               key={i}
               text={data.title}
               number={data.number}
-              color={COLORS[i % COLORS.length]}
+              color={COLORS2[i % COLORS.length]}
               icon={data.icon}
             />
           );
         })}
       </div>
-      <div className="flex flex-col md:flex-row p-0 md:p-2">
-        <div className=" py-1 md:p-2" style={{ flex: 3 }}>
-          <RecentMeetings />
+      <div className="bg-[#141414] shadow-md border p-2 mb-4 flex justify-between rounded border-gray-100  items-center">
+        <div className="flex items-center justify-center gap-3">
+          <BiWallet size={30} color="white" />
+          <span className="text-xl text-white font-mono font-bold">Wallets</span>
         </div>
-        <div className=" py-1 md:p-2" style={{ flex: 2 }}>
-          <PieChart header={options} />
-        </div>
-      </div>
-      <div className="flex flex-col-reverse md:flex-row p-0 md:p-2">
-        <div className=" py-1 md:p-2" style={{ flex: 2 }}>
-          <BarChart />
-        </div>
-        <div className=" py-1 md:p-2" style={{ flex: 3 }}>
-          <LineChart />
+
+        <div>
+          <p className="text-xl font-bold font-mono text-white">$456,789,987</p>
         </div>
       </div>
+      <TableList />
     </div>
   );
 }
