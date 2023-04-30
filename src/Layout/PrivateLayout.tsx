@@ -28,20 +28,20 @@ import { Dropdown } from "antd";
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
 
-const Menuitems: MenuProps["items"] = [
-  {
-    key: "1",
-    label: <Pill image="" text="wq23456yqhvgq" size="small" variant="filled" />,
-  },
-  {
-    key: "2",
-    label: <Pill image="" text="wq23456yqhvgq" size="small" variant="filled" />,
-  },
-  {
-    key: "3",
-    label: <Pill image="" text="wq23456yqhvgq" size="small" variant="filled" />,
-  },
-];
+// const Menuitems: MenuProps["items"] = [
+//   {
+//     key: "1",
+//     label: <Pill image="" text="wq23456yqhvgq" size="small" variant="filled" />,
+//   },
+//   {
+//     key: "2",
+//     label: <Pill image="" text="wq23456yqhvgq" size="small" variant="filled" />,
+//   },
+//   {
+//     key: "3",
+//     label: <Pill image="" text="wq23456yqhvgq" size="small" variant="filled" />,
+//   },
+// ];
 
 interface MenuItem {
   title: string;
