@@ -1,10 +1,6 @@
 import { Typography, Row, Col } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import BarChart from "../../components/charts/BarChart";
-import LineChart from "../../components/charts/LineChart";
-import PieChart from "../../components/charts/PieChart";
-import RecentMeetings from "../../components/recentmeetings/RecentMeetings";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";

@@ -36,18 +36,20 @@ const Login: React.FC<LoginProps> = () => {
             >
               <Form.Item
                 name="username"
+                
                 rules={[
                   { required: true, message: "Please input your Username!" },
                 ]}
               >
                 <Input
-                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  prefix={<UserOutlined className="site-form-item-icon " />}
                   placeholder="Username"
                   size={isMobile?"middle":"large"} 
                 />
               </Form.Item>
               <Form.Item
                 name="password"
+              
                 rules={[
                   { required: true, message: "Please input your Password!" },
                 ]}
@@ -62,6 +64,7 @@ const Login: React.FC<LoginProps> = () => {
               <div className="flex justify-between items-center">
                 <Checkbox
                   checked={termschecked}
+                  className="text-black"
                   onChange={(e) => setTermsChecked(e.target.checked)}
                 >
                   Remember Me

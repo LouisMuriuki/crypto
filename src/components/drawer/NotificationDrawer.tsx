@@ -5,16 +5,16 @@ import {GrFormClose} from 'react-icons/gr'
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 const Notifications = [
-  "The CEO has rescheduled today's meeting with Michael to tomorrow at 11 AM.",
-  "The CFO has cancelled their meeting with the sales team due to a family emergency.",
-  "The HR manager has scheduled a new meeting with the interns for next week.",
-  "The marketing director has rescheduled their one-on-one with John from Friday to Thursday.",
-  "The IT manager has cancelled their weekly status update meeting.",
-  "The project manager has scheduled a new conference call with the remote team for 3 PM.",
-  "The chief of operations has rescheduled the departmental meeting to next month.",
-  "The legal counsel has cancelled their meeting with the marketing team due to a prior engagement.",
-  "The head of R&D has scheduled a new meeting with the engineering team for tomorrow at 2 PM.",
-  "The CEO's assistant has rescheduled the budget review meeting to next week.",
+  "Bitcoin price just hit a new all-time high!",
+  "Ethereum network experiencing high congestion. Expect slower transaction times.",
+  "New decentralized finance (DeFi) protocol just launched. Check it out!",
+  "Binance announces support for new altcoin.",
+  "Crypto market experiencing volatility. Exercise caution.",
+  "Major crypto exchange hacked. Withdraw your funds immediately.",
+  "Experts predict a bull run for altcoins in the coming weeks.",
+  "Bitcoin mining difficulty set to increase in the next adjustment period.",
+  "New stablecoin backed by USD just launched. Purchase available on our platform.",
+  "Important security update: Please enable two-factor authentication on your account.",
 ];
 
 const NotificationDrawer: React.FC = () => {
@@ -36,9 +36,9 @@ const NotificationDrawer: React.FC = () => {
       >
         {Notifications.map((notification, i) => {
           return (
-            <div key={i} className="relative bg-cyan-200 p-1 rounded-md w-full m-1">
-              <p>{notification}</p>
-              <GrFormClose size={20} style={{color:"red"}}  className="absolute top-1 right-1 cursor-pointer"/>
+            <div key={i} className="relative bg-[#141414] p-1 rounded-md w-full m-1">
+              <p className="text-white p-2 font-mono">{notification}</p>
+              <GrFormClose size={20} color={"red"} className="absolute top-1 right-1 cursor-pointer"/>
             </div>
           );
         })}

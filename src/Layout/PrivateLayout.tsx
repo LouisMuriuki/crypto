@@ -69,49 +69,7 @@ const items: MenuItem[] = [
     "1",
     <PieChartOutlined style={{ fontSize: "16px" }} />,
     "/dashboard"
-  ),
-  getItem(
-    "Staff",
-    "sub1",
-    <TeamOutlined style={{ fontSize: "16px" }} />,
-    "/staff/"
-    // [
-    //   getItem("Manage", "2", <UsergroupAddOutlined />, "/staff/"),
-    //   getItem(
-    //     "Reports",
-    //     "3",
-    //     <DeliveredProcedureOutlined style={{ fontSize: "16px" }} />,
-    //     "/staff/reports"
-    //   ),
-    // ]
-  ),
-  getItem(
-    "Meetings",
-    "sub2",
-    <BsBriefcaseFill size={16} style={{ marginRight: 10 }} />,
-    undefined,
-    [
-      getItem(
-        "View",
-        "6",
-        <BsBriefcaseFill size={16} style={{ marginRight: 10 }} />,
-        "/meetings/"
-      ),
-      getItem(
-        "Reports",
-        "7",
-        <DeliveredProcedureOutlined style={{ fontSize: "16px" }} />,
-        "/meetings/reports"
-      ),
-    ]
-  ),
-  getItem(
-    "Account",
-    "8",
-    <UserOutlined style={{ fontSize: "16px" }} />,
-    "/account"
-  ),
-  getItem("Logout", "9", <PoweroffOutlined style={{ fontSize: "16px" }} />),
+  )
 ];
 
 const PrivateLayout = () => {
