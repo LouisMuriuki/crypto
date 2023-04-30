@@ -69,7 +69,7 @@ const items: MenuItem[] = [
     "1",
     <PieChartOutlined style={{ fontSize: "16px" }} />,
     "/dashboard"
-  )
+  ),
 ];
 
 const PrivateLayout = () => {
@@ -125,7 +125,12 @@ const PrivateLayout = () => {
         collapsed={collapsed}
         breakpoint="lg"
         defaultCollapsed={isMobile ? true : false}
-        zeroWidthTriggerStyle={{ position: "absolute", top: 0, marginTop: 12,background:"#141414" }}
+        zeroWidthTriggerStyle={{
+          position: "absolute",
+          top: 0,
+          marginTop: 12,
+          background: "#141414",
+        }}
         collapsedWidth="0"
         onBreakpoint={(broken) => {
           console.log(broken);
@@ -148,9 +153,7 @@ const PrivateLayout = () => {
             margin: 16,
           }}
         >
-          <span
-            className=" flex text-2xl font-bold text-[#FF8042] items-center justify-center"
-          >
+          <span className=" flex text-2xl font-bold text-[#FF8042] items-center justify-center">
             $COINSIFY
           </span>
           {/* <Dropdown  menu={{ items }} placement="bottomLeft" arrow>
@@ -225,9 +228,7 @@ const PrivateLayout = () => {
               justifyContent: "flex-center",
             }}
           >
-            <p className="pl-12 text-base font-mono  ">
-              Hello Monica,
-            </p>
+            <p className="pl-12 text-base font-mono  ">Hello Monica,</p>
           </div>
           <div
             style={{
@@ -237,24 +238,28 @@ const PrivateLayout = () => {
             }}
           >
             <div className="flex flex-col md:flex-row  items-center font-mono leading-none">
-              <span className="text-xs md:text-base">
-                {time?.toLocaleDateString("en-GB", {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </span>
-              <span className="px-2">
-                <Badge dot color="black" size="small" />
-              </span>
-              <span className="time">
-                {time?.toLocaleString("en-US", {
-                  hour: "numeric",
-                  minute: "numeric",
-                  second: "numeric",
-                  hour12: true,
-                })}
-              </span>
+              {isMobile ? null : (
+                <>
+                  <span className="text-xs md:text-base">
+                    {time?.toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <span className="px-2">
+                    <Badge dot color="black" size="small" />
+                  </span>
+                  <span className="time">
+                    {time?.toLocaleString("en-US", {
+                      hour: "numeric",
+                      minute: "numeric",
+                      second: "numeric",
+                      hour12: true,
+                    })}
+                  </span>
+                </>
+              )}
             </div>
           </div>
           <div
