@@ -116,7 +116,7 @@ function Home() {
       <div className="flex items-center justify-between mb-5 flex-wrap">
         {Coins.map((coin, i) => {
           return (
-            <div className="px-[1px] py-[4px] " key={i}>
+            <div className="md:px-[1px] py-[4px] " key={i}>
               <Pill
                 image={coin.imageUrl}
                 text={coin.name}
@@ -145,12 +145,12 @@ function Home() {
       </div>
       <div className="bg-[#141414] shadow-md border p-2 mb-4 flex justify-between rounded border-gray-100  items-center">
         <div className="flex items-center justify-center gap-3">
-          <BiWallet size={30} color="white" />
-          <span className="text-xl text-white font-mono font-bold">Wallets</span>
+          <BiWallet size={isMobile?24:30} color="white" />
+          <span className="text-base md:text-xl text-white font-mono font-bold">Wallets</span>
         </div>
 
         <div>
-          <p className="text-xl font-bold font-mono text-white">$456,789,987</p>
+          <p className="text-base md:text-xl font-bold font-mono text-white">$456,789,987</p>
         </div>
       </div>
       <TableList />
