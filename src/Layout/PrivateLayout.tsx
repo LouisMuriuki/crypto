@@ -26,7 +26,7 @@ import Pill from "../components/pill/Pill";
 import type { MenuProps } from "antd";
 import { Dropdown } from "antd";
 const { Header, Content, Sider } = Layout;
-const { Title } = Typography;
+// const { Title } = Typography;
 
 // const Menuitems: MenuProps["items"] = [
 //   {
