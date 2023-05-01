@@ -48,38 +48,38 @@ const Coins = [
     imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png",
     name: "Ethereum",
   },
-  {
-    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/3794.png",
-    name: "Litecoin",
-  },
-  {
-    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/6528.png",
-    name: "Ripple",
-  },
-  {
-    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png",
-    name: "Cardano",
-  },
-  {
-    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/74.png",
-    name: "Dogecoin",
-  },
+  // {
+  //   imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/3794.png",
+  //   name: "Litecoin",
+  // },
+  // {
+  //   imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/6528.png",
+  //   name: "Ripple",
+  // },
+  // {
+  //   imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png",
+  //   name: "Cardano",
+  // },
+  // {
+  //   imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/74.png",
+  //   name: "Dogecoin",
+  // },
   {
     imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/4687.png",
     name: "Binance Coin",
   },
-  {
-    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png",
-    name: "Polkadot",
-  },
-  {
-    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png",
-    name: "Chainlink",
-  },
-  {
-    imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png",
-    name: "Solana",
-  },
+  // {
+  //   imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png",
+  //   name: "Polkadot",
+  // },
+  // {
+  //   imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png",
+  //   name: "Chainlink",
+  // },
+  // {
+  //   imageUrl: "https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png",
+  //   name: "Solana",
+  // },
 ];
 function Home() {
   const { Title } = Typography;
